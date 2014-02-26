@@ -43,16 +43,16 @@ This is super easy, way easier than running sidekiq/resque.
 ### Remove your existing worker gems and add `rails_push_queues` gem.
 
 1. Remove resque or sidekiq from your Gemfile
-1. Add rails_push_queues to your Gemfile
+1. 'Add rails_push_queues' to your Gemfile
 1. bundle update.
 
 ### Set Iron configs
 
-LINK TO iron config stuff, iron.json or ENV vars.
+There are a few ways to do this such as an iron.json file, Iron ENV variables or in your own config. [More details](http://dev.iron.io/mq/reference/configuration/).
 
 On Heroku, just add the IronMQ add on: `heroku addons:add iron_mq`
 
-### Be sure you're app is deployed so you can set the IronMQ subscriber URL
+### Be sure you're app is deployed somewhere with an accessible address so you can set the IronMQ subscriber URL
 
 Deploy to heroku or wherever then append `/queues/receive` to make a URL like:
 
@@ -77,4 +77,11 @@ rake queues:info\[ImageConversionWorker\]
 ```
 
 That's it!  Give it a try.
+
+## More
+
+Here's an example rails app you can try/check out to see it in action: https://github.com/treeder/rails_push_queues_test_app
+
+
+
 
