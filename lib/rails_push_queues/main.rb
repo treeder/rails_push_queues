@@ -1,8 +1,6 @@
-module RailsPushQueues
+require 'iron_mq'
 
-  def self.queue_job(clz, *args)
-    @@qcomm.queue_job(clz, *args)
-  end
+module RailsPushQueues
 
   class QueueComm
 
@@ -15,16 +13,15 @@ module RailsPushQueues
     end
 
     def queue_job(clz, *args)
-      queue_name = "railspushtest"
 
       if !clz.is_a?(String)
-        clz = self.name
+        clz = clz.name
       end
       body = {"class"=>clz, "args"=>[]}
       args.each do |a|
         body["args"] << a
       end
-      q = RailsPushQueues.ironmq.queue(clz)
+      q = mq.queue(clz)
       q.post(body.to_json)
 
     end

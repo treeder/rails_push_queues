@@ -13,7 +13,7 @@ module Sidekiq
 
       def perform_async(*args)
         clz = self
-        RailsPushQueues.queue_job
+        RailsPushQueues.comm.queue_job(clz, args)
       end
     end
   end

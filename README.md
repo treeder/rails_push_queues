@@ -6,18 +6,22 @@ You can easily use Resque and/or Sidekiq workers without change.
 
 ## Set Iron configs
 
-In the environment config file, set:
+LINK TO iron config stuff, iron.json or ENV vars.
 
-```
-config.iron_token = 'X'
-config.iron_project_id = 'Y'
-```
+On Heroku, just add the IronMQ add on: `heroku addons:add iron_mq`
+
 
 ## Register the workers
 
 This is basically creating queues for each worker and setting your application as the subscriber.
 
 ```
-rake queues:subscribe ImageConversionWorker
+rake queues:subscribe\[ImageConversionWorker,http://enigmatic-falls-123.herokuapp.com/queues/receive\]
+```
+
+To verify the subscriber was added, you can run:
+
+```
+rake queues:info\[ImageConversionWorker\]
 ```
 

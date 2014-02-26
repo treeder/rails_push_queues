@@ -7,13 +7,17 @@ class QueuesController < ApplicationController
     body = request.body.read
     p body
     json = JSON.parse(body)
-    job = json["class"].constantize.new
-    # the following is for Resque 2.X
-    #json["vars"].each {|k, v| job.instance_variable_set("@#{k}", v) }
-    #job.work
-    args = json["args"]
-    job.perform(*args)
-    render :json => {"got"=>"it"}
+    begin
+      job = json["class"].constantize.new
+      # the following is for Resque 2.X
+      #json["vars"].each {|k, v| job.instance_variable_set("@#{k}", v) }
+      #job.work
+      args = json["args"]
+      job.perform(*args)
+      render :json => {"got" => "it"}
+    rescue Exception => ex
+      render :status => 500, :json => {"error"=>"#{ex.message}"}
+    end
   end
 
 end
