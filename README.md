@@ -1,10 +1,13 @@
-# RailsPushQueues
+# Rails Push Queues
 
-Why?
+## Why?
 
 No worker processes/daemons, no redis, no load on your database, easier to configure, easier to use, no maintenance, boom.
 
 You can use your existing Resque and/or Sidekiq workers without change.
+
+This project is inspired by [Laravel's Push Queues](http://laravel.com/docs/queues#push-queues), you can watch a [great
+ video demonstrating them here](http://vimeo.com/64703617). Kudos to [Taylor Otwell](http://taylorotwell.com/).
 
 ## Usage
 
